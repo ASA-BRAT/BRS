@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} | BRS AutoAtelier{% endblock %}
+
+{% block content %}
+<section class="categories-page">
+    <div class="gallery-header">
+        <a href="/">Назад</a>
+        <h1>{{ title }}</h1>
+        <span class="subtitle">Коллекция работ / {{ categories|length }} категорий</span>
+    </div>
+
+    <div class="service-grid">
+        {% for key, category in categories.items() %}
+        <a href="{{ url_for('subcategory', service=service, category=key) }}"
+           class="service-card">
+            <img src="{{ url_for('static', filename=category.cover) }}"
+                 alt="{{ category.title }}"
+                 loading="lazy">
+            <div class="service-overlay">
+                <h2>{{ category.title }}</h2>
+                <p>Смотреть работы</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

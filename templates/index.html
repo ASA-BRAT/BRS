@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}BRS AutoAtelier{% endblock %}
+
+{% block content %}
+<section class="landing">
+    <div class="brand">
+        <div class="logo-mark">
+            BRS
+        </div>
+
+        <div class="brand-line"></div>
+
+        <span>Auto Atelier</span>
+    </div>
+
+    <div class="service-grid">
+        {% for key, service in services.items() %}
+        <a href="/{{ key }}" class="service-card">
+            <img src="{{ url_for('static', filename=service.cover) }}"
+                 alt="{{ service.title }}"
+                 loading="lazy">
+            <div class="service-overlay">
+                <h2>{{ service.title }}</h2>
+                <p>Открыть коллекцию</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

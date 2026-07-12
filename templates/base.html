@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BRS AutoAtelier{% endblock %}</title>
+
+    <meta name="description"
+          content="BRS AutoAtelier — Премиальное автоателье. Аквапринт, перетяжка салона, реставрация и детейлинг.">
+    <meta name="theme-color" content="#050505">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome (иконки) -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- Собственные стили -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+{# ---------- ШАПКА – ТОЛЬКО НА ГЛАВНОЙ ---------- #}
+{% if request.path == '/' %}
+<header class="info-header" id="infoHeader">
+    <div class="header-container">
+        <!-- ── Адрес + ссылка на 2ГИС ──────────────────────── -->
+        <div class="info-item">
+            <span class="info-icon"><i class="fas fa-map-marker-alt"></i></span>
+            <span class="info-text">
+                г. Якутск, ул. Кальвица 12в бокс 3
+                <a href="https://2gis.ru/yakutsk/geo/70000001000000000"
+                   target="_blank"
+                   rel="noopener"
+                   class="info-link dgis-link"
+                   title="Посмотреть на 2ГИС">
+                    <i class="fas fa-map-marked-alt"></i> 2ГИС
+                </a>
+            </span>
+        </div>
+
+        <!-- ── Телефон ──────────────────────────────────────── -->
+        <div class="info-item">
+            <span class="info-icon"><i class="fas fa-phone-alt"></i></span>
+            <span class="info-text">+7 (924) 594-88-94</span>
+        </div>
+
+        <!-- ── Мессенджеры и соцсети ──────────────────────── -->
+        <div class="info-chats">
+            <!-- WhatsApp -->
+            <a href="https://wa.me/79245948894"
+               target="_blank"
+               rel="noopener"
+               class="chat-link wa-link"
+               aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+
+            <!-- Telegram -->
+            <a href="https://t.me/brs_autoatelier"
+               target="_blank"
+               rel="noopener"
+               class="chat-link tg-link"
+               aria-label="Telegram">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+
+            <!-- Instagram (добавлен) -->
+            <a href="https://instagram.com/brsautoatelier"
+               target="_blank"
+               rel="noopener"
+               class="chat-link ig-link"
+               aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+</header>
+{% endif %}
+
+<!-- =====================================
+     PAGE
+====================================== -->
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<!-- =====================================
+     IMAGE VIEWER (LIGHTBOX)
+====================================== -->
+<div id="viewer-overlay">
+    <button id="viewer-close" class="viewer-close" type="button" aria-label="Закрыть">✕</button>
+    <button id="viewer-prev" class="viewer-arrow left" type="button" aria-label="Предыдущее">❮</button>
+    <img id="viewer-image" src="" alt="">
+    <button id="viewer-next" class="viewer-arrow right" type="button" aria-label="Следующее">❯</button>
+    <div id="viewer-counter">1 / 1</div>
+</div>
+
+<!-- =====================================
+     FOOTER
+====================================== -->
+<footer>
+    © {{ now.year }} BRS AutoAtelier
+</footer>
+
+<!-- =====================================
+     JS
+====================================== -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+<!-- Добавляем класс .loaded к <body> после полной загрузки страницы
+     (нужен для плавного появления логотипа, если захотите позже вернуть изображение) -->
+<script>
+    window.addEventListener('load', function () {
+        document.body.classList.add('loaded');
+    });
+</script>
+</body>
+</html>

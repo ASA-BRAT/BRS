@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} | BRS AutoAtelier{% endblock %}
+
+{% block content %}
+<section class="gallery-page">
+    <div class="gallery-header">
+        <a href="/">На главную</a>
+        <h1>{{ title }}</h1>
+        <span class="subtitle">
+            Галерея / {{ images|length }}
+            {% set n = images|length %}
+            {% if n % 10 == 1 and n % 100 != 11 %}фото
+            {% elif n % 10 in [2,3,4] and n % 100 not in [12,13,14] %}фотографии
+            {% else %}фотографий{% endif %}
+        </span>
+    </div>
+
+    {% if images %}
+    <div class="gallery">
+        {% for image in images %}
+        <div class="gallery-item" data-index="{{ loop.index }}">
+            <img src="{{ url_for('static', filename='uploads/' + folder + '/' + image) }}"
+                 alt="{{ title }} — фото {{ loop.index }}"
+                 loading="lazy">
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty">
+        <h2>Фотографии скоро появятся</h2>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
